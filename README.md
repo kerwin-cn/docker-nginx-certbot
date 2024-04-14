@@ -7,8 +7,15 @@
 ## 脚本使用方法
 
 
-### 1 启动docker
+### 1 下载并启动docker
 ```bash
+# 下载
+git clone https://github.com/kerwin-cn/docker-nginx-certbot.git
+
+# 进入文件夹并启动
+cd docker-nginx-certbot
+
+#启动nginx和certbot
 docker-compose up -d
 ```
 
@@ -33,13 +40,18 @@ docker-compose up -d
 ]
 
 
-// 修改成自己的网址和转发地址
+// 修改成自己的网址和转发地址 主要修改 site_name 、proxy_pass 、is_enabled 三项
 ```
 
 ### 3 执行脚本
 
 ```bash
+
 chmod +x ./check_sites.sh
+
 ./check_sites.sh
+
+#等待安装完成，主要做了 把自己添加计划任务 > 根据配置文件下载证书 > 删减nginx配置 >检查是否需要 续期证书 
+#计划任务每天两天执行一次
 ```
 
