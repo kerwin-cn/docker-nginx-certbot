@@ -1,0 +1,12 @@
+# environment variables
+server {
+    listen 443 ssl;
+    server_name ${NGINX_HOSTNAME}; 
+
+    ssl_certificate /etc/letsencrypt/archive/${NGINX_HOSTNAME}/fullchain1.pem;
+    ssl_certificate_key /etc/letsencrypt/archive/${NGINX_HOSTNAME}/privkey1.pem;
+
+    location / {
+        proxy_pass ${NGINX_PROXY_PASS};
+    }
+}

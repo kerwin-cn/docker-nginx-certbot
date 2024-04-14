@@ -1,0 +1,14 @@
+[
+    {
+        "site_name": "example.com",
+        "proxy_pass": "http://x.xxx.xx.xxx:8888",
+        "is_enabled": false,
+        "cert_status": "init"
+    },
+    {
+        "site_name": "abc.example.com",
+        "proxy_pass": "http://x.xxx.xx.xxx:8080",
+        "is_enabled": false,
+        "cert_status": "init"
+    }
+]

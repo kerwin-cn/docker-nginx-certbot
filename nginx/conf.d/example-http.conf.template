@@ -1,0 +1,8 @@
+# environment variables
+server {
+    listen 80;
+    server_name ${NGINX_HOSTNAME}; 
+    location / {
+        proxy_pass ${NGINX_PROXY_PASS};
+    }
+}
