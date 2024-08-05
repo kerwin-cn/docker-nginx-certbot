@@ -1,3 +1,4 @@
 test.sh
 代码片段.text
 ./data/nginx/letsencrypt/archive/*
+./nginx/conf.d/*
