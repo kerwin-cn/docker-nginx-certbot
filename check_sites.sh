@@ -73,14 +73,14 @@ server {
     ssl_certificate_key /etc/letsencrypt/archive/$site_name/privkey1.pem;
 
     location / {
-        proxy_pass $proxy_pass;
+        proxy_pass \$proxy_pass;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
     }
 }" >nginx/conf.d/"$site_name"-https.conf
             echo "========>添加了【$site_name】的配置文件"
