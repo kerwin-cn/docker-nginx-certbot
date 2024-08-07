@@ -73,7 +73,7 @@ server {
     ssl_certificate_key /etc/letsencrypt/archive/$site_name/privkey1.pem;
 
     location / {
-        proxy_pass \$proxy_pass;
+        proxy_pass $proxy_pass;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -88,8 +88,8 @@ server {
     fi
 done
 
-#更新一下nginx配置
-docker-compose exec nginx nginx -s reload
 #维护一下证书
 docker-compose exec certbot certbot renew
+#更新一下nginx配置
+docker-compose exec nginx nginx -s reload
 echo "========>检查了【所有的】的证书是否过期"
