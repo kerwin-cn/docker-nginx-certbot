@@ -66,6 +66,11 @@ for i in $(seq 0 "$(($array_length - 1))"); do
         if [ ! -e nginx/conf.d/"$site_name"-https.conf ]; then
             echo "# 程序自动生成
 server {
+    listen 80;
+    server_name $site_name;
+    return 301 https://$server_name$request_uri;
+}
+server {
     listen 443 ssl;
     server_name $site_name;
 
