@@ -105,10 +105,6 @@ for i in $(seq 0 "$(($array_length - 1))"); do
         mv data/nginx/letsencrypt/archive/"$site_name"/chain2.pem data/nginx/letsencrypt/archive/"$site_name"/chain1.pem
         mv data/nginx/letsencrypt/archive/"$site_name"/fullchain2.pem data/nginx/letsencrypt/archive/"$site_name"/fullchain1.pem
         mv data/nginx/letsencrypt/archive/"$site_name"/privkey2.pem data/nginx/letsencrypt/archive/"$site_name"/privkey1.pem
-        rm data/nginx/letsencrypt/archive/"$site_name"/cert2.pem
-        rm data/nginx/letsencrypt/archive/"$site_name"/chain2.pem
-        rm data/nginx/letsencrypt/archive/"$site_name"/fullchain2.pem
-        rm data/nginx/letsencrypt/archive/"$site_name"/privkey2.pem
 
         echo "========>更新了【$site_name】的证书文件========="
     fi
