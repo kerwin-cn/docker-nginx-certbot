@@ -95,19 +95,25 @@ done
 
 #维护一下证书
 docker-compose exec certbot certbot renew
+echo "========>检查了【所有的】的证书是否过期"
 
 #检测并改成新证书名称为1
 for i in $(seq 0 "$(($array_length - 1))"); do
     site_name=$(jq -r --argjson index "$i" '.[$index].site_name' "$JSON_FILE")
     if [ -e data/nginx/letsencrypt/archive/"$site_name"/fullchain2.pem ]; then
+        mv data/nginx/letsencrypt/archive/"$site_name"/cert2.pem data/nginx/letsencrypt/archive/"$site_name"/cert1.pem
+        mv data/nginx/letsencrypt/archive/"$site_name"/chain2.pem data/nginx/letsencrypt/archive/"$site_name"/chain1.pem
         mv data/nginx/letsencrypt/archive/"$site_name"/fullchain2.pem data/nginx/letsencrypt/archive/"$site_name"/fullchain1.pem
         mv data/nginx/letsencrypt/archive/"$site_name"/privkey2.pem data/nginx/letsencrypt/archive/"$site_name"/privkey1.pem
+        rm data/nginx/letsencrypt/archive/"$site_name"/cert2.pem
+        rm data/nginx/letsencrypt/archive/"$site_name"/chain2.pem
         rm data/nginx/letsencrypt/archive/"$site_name"/fullchain2.pem
         rm data/nginx/letsencrypt/archive/"$site_name"/privkey2.pem
+
         echo "========>更新了【$site_name】的证书文件========="
     fi
 done
 
 #更新一下nginx配置
 docker-compose exec nginx nginx -s reload
-echo "========>检查了【所有的】的证书是否过期"
+echo "========>重启了nginx============"
