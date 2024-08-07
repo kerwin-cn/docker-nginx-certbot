@@ -68,7 +68,7 @@ for i in $(seq 0 "$(($array_length - 1))"); do
 server {
     listen 80;
     server_name $site_name;
-    return 301 https://$server_name\$request_uri;
+    return 301 https://${$server_name}\$request_uri;
 }
 server {
     listen 443 ssl;
