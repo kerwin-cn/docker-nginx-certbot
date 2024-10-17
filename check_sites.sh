@@ -70,6 +70,7 @@ server {
             docker-compose exec certbot certbot certonly --webroot -w /var/www/letsencrypt -d "$site_name" --agree-tos --email \
                 "$EMAIL" --non-interactive --text
             jq ".[$i].cert_status = \"installed\"" "$JSON_FILE" >data.json.tmp && mv data.json.tmp "$JSON_FILE"
+            rm -f nginx/conf.d/"$site_name"-http.conf
             echo "========>申请了【$site_name】的证书"
         fi
         if [ ! -e nginx/conf.d/"$site_name"-https.conf ]; then
