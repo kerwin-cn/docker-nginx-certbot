@@ -64,6 +64,7 @@ for i in $(seq 0 "$(($array_length - 1))"); do
 server {
     listen 80;
     server_name ${site_name};
+    .well-known/acme-challenge/ /var/www/letsencrypt;
 }" >nginx/conf.d/"$site_name"-http.conf
             docker-compose exec nginx nginx -s reload
             #获取证书
