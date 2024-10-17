@@ -45,6 +45,9 @@ for i in $(seq 0 "$(($array_length - 1))"); do
         #如果失效了，就删除一下
         docker-compose exec certbot certbot delete --cert-name "$site_name" --non-interactive
         jq ".[$i].cert_status = \"removed\"" "$JSON_FILE" >data.json.tmp && mv data.json.tmp "$JSON_FILE"
+        if [ -e nginx/conf.d/"$site_name"-https.conf ]; then
+            rm -f nginx/conf.d/"$site_name"-https.conf
+        fi
         echo "========>删除了【$site_name】的证书"
     fi
 
