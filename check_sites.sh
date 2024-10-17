@@ -48,6 +48,9 @@ for i in $(seq 0 "$(($array_length - 1))"); do
         if [ -e nginx/conf.d/"$site_name"-https.conf ]; then
             rm -f nginx/conf.d/"$site_name"-https.conf
         fi
+        if [ -d data/nginx/letsencrypt/archive/"$site_name" ]; then
+            rm -rf data/nginx/letsencrypt/archive/"$site_name"
+        fi
         echo "========>删除了【$site_name】的证书"
     fi
 
