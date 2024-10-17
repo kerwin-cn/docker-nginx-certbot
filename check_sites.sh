@@ -60,6 +60,12 @@ for i in $(seq 0 "$(($array_length - 1))"); do
 
     if [ $is_enabled == true ]; then
         if [ ! $cert_status == "installed" ]; then
+            echo "# 程序自动生成
+server {
+    listen 80;
+    server_name ${site_name};
+}" >nginx/conf.d/"$site_name"-http.conf
+            docker-compose exec nginx nginx -s reload
             #获取证书
             docker-compose exec certbot certbot certonly --webroot -w /var/www/letsencrypt -d "$site_name" --agree-tos --email \
                 "$EMAIL" --non-interactive --text
